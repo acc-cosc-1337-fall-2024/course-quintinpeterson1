@@ -1,10 +1,10 @@
 //cpp
 #include "tic_tac_toe_manager.h"
 
-void TicTacToeManager::save_game(TicTacToe b)
+void TicTacToeManager::save_game(std::unique_ptr<TicTacToe> b)
 {
-    games.push_back(b);
-    update_winner_count(b.get_player());
+    update_winner_count(b->get_player());
+    games.push_back(std::move(b));
 }
 
 void TicTacToeManager::get_winner_total(int& x, int& o, int& t)
@@ -13,7 +13,6 @@ void TicTacToeManager::get_winner_total(int& x, int& o, int& t)
     x = x_win;
     o = o_win;
     t = ties;
-
 }
 
 
